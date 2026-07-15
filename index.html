@@ -55,14 +55,14 @@
           </div>
 
           <!-- buttons -->
-          <button onclick="addProduct()" class="btn btn-light mb-3" id="addBtn">Add Product</button>
-          <button onclick="updateProduct()" class="btn btn-outline-dark mb-3" id="addBtn">Update Product</button>
+          <button onclick="addProduct()" class="btn btn-light mb-3" id="btnAdd">Add Product</button>
+          <button onclick="updateProduct()" class="btn btn-outline-dark mb-3 d-none" id="btnUpdate">Update Product</button>
         </div>
       </div>
     </section>
     <section>
         <div class="container-fluid">
-            <input type="search" class="form-control w-50 mx-auto my-4" placeholder="Search by name">
+            <input type="search" id="searchInput" oninput="displayData()" class="form-control w-50 mx-auto my-4" placeholder="Search by name">
             <div class="row" id="rowData">
                 
             </div>
