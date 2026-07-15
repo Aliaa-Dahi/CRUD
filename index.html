@@ -53,33 +53,22 @@
             />
             <label for="productImage"">Product Image</label>
           </div>
+
+          <!-- buttons -->
+          <button onclick="addProduct()" class="btn btn-light mb-3" id="addBtn">Add Product</button>
+          <button onclick="updateProduct()" class="btn btn-outline-dark mb-3" id="addBtn">Update Product</button>
         </div>
       </div>
     </section>
     <section>
         <div class="container-fluid">
             <input type="search" class="form-control w-50 mx-auto my-4" placeholder="Search by name">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="card text-start">
-                        <img class="card-img-top" src="images/wp8896750.jpg" alt="Title" />
-                        <div class="card-body text-center">
-                            <span>index</span>
-                            <h3 class="card-title">Product Name</h3>
-                            <p class="card-text">Product price</p>
-                            <p class="card-text">Product Category</p>
-                            <p class="card-text">Product Description</p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <button class="btn btn-outline-danger btn-sm">Delete</button>
-                            <button class="btn btn-outline-warning btn-sm">Update</button>
-                        </div>
-                    </div>
-                    
-                </div>
+            <div class="row" id="rowData">
+                
             </div>
         </div>
     </section>
     <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
