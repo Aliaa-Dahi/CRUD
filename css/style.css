@@ -1,9 +1,1 @@
-/* ─────────────────────────────────────────
-   Entry point — imports all partials.
-   Order matters: common first (tokens),
-   then the feature-specific files.
-───────────────────────────────────────── */
-@import url('common.css');
-@import url('form.css');
-@import url('filter.css');
-@import url('card.css');
+/* CSS files are linked directly in index.html */
