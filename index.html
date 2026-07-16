@@ -18,20 +18,26 @@
               class="form-control"
               id="productName"
               placeholder="name@example.com"
+              oninput="validationInputs(this, 'msgName')"
             />
             <label for="productName">Product Name</label>
+            <p class="alert alert-danger d-none" id="msgName">It must start with a letter, be 3 to 20 character long, and only contain letters or underscores</p>
           </div>
+
           <div class="form-floating mb-3">
             <input
               type="number"
               class="form-control"
               id="productPrice"
               placeholder="name@example.com"
+              oninput="validationInputs(this, 'msgPrice')"
             />
             <label for="productPrice">Product Price</label>
+            <p class="alert alert-danger d-none" id="msgPrice">It must less than 100$</p>
           </div>
+
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="productCategory" placeholder="name@example.com" list="dataCategory">
+            <input type="text" class="form-control" oninput="validationInputs(this, 'msgCategory')" id="productCategory" placeholder="name@example.com" list="dataCategory">
             <label for="productCategory">Product Category</label>
             <datalist id="dataCategory">
                 <option value="tv"></option>
@@ -39,19 +45,28 @@
                 <option value="screens"></option>
                 <option value="electronics"></option>
             </datalist>
+            <p class="alert alert-danger d-none" id="msgCategory">It must be from the available options</p>
+
           </div>
+
           <div class="form-floating mb-3">
-            <textarea style="height: 100px;" class="form-control" id="productDescription" placeholder="Product Description"></textarea>
+            <textarea style="height: 100px;" oninput="validationInputs(this, 'msgDescription')" class="form-control" id="productDescription" placeholder="Product Description"></textarea>
             <label for="productDescription">Product Description</label>
+            <p class="alert alert-danger d-none" id="msgDescription">It must be more than 3 characters</p>
+
           </div>
+
           <div class="form-floating mb-3">
             <input
               type="file"
               class="form-control"
               id="productImage"
               placeholder="name@example.com"
+              oninput="validationInputs(this, 'msgImage')"
             />
             <label for="productImage"">Product Image</label>
+            <p class="alert alert-danger d-none" id="msgImage">It must be image</p>
+
           </div>
 
           <!-- buttons -->
