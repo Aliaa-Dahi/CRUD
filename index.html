@@ -3,86 +3,201 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CRUD</title>
+    <title>Product Catalog</title>
+    <meta name="description" content="Manage your product catalog — add, update, and delete products with ease." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <section>
-      <div class="container bg-info p-4 rounded-4 my-3">
-        <h1 class="text-center">CRUD SYSTEM</h1>
-        <div>
-          <div class="form-floating mb-3">
+
+    <!-- ── Sticky Header ── -->
+    <header class="app-header">
+      <h1 class="app-header__title">Product Catalog</h1>
+      <button class="app-header__search-btn" aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="app-main">
+
+      <!-- ── Left Column (Desktop) / Add Form ── -->
+      <aside class="form-column">
+
+        <!-- Add New Product Card -->
+        <div class="card-panel" id="addProductCard">
+          <div class="card-panel__header">
+            <div class="card-panel__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+              </svg>
+            </div>
+            <h2 class="card-panel__title">Add New Product</h2>
+          </div>
+
+          <!-- Product Name -->
+          <div class="field-group">
+            <label class="field-label" for="productName">Product Name</label>
             <input
               type="text"
-              class="form-control"
+              class="field-input"
               id="productName"
-              placeholder="name@example.com"
+              placeholder="e.g. Enterprise Cloud License"
               oninput="validationInputs(this, 'msgName')"
             />
-            <label for="productName">Product Name</label>
-            <p class="alert alert-danger d-none" id="msgName">It must start with a letter, be 3 to 20 character long, and only contain letters or underscores</p>
+            <p class="field-error d-none" id="msgName">Must start with a letter, be 3–20 characters, letters/underscores only.</p>
           </div>
 
-          <div class="form-floating mb-3">
-            <input
-              type="number"
-              class="form-control"
-              id="productPrice"
-              placeholder="name@example.com"
-              oninput="validationInputs(this, 'msgPrice')"
-            />
-            <label for="productPrice">Product Price</label>
-            <p class="alert alert-danger d-none" id="msgPrice">It must less than 100$</p>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" oninput="validationInputs(this, 'msgCategory')" id="productCategory" placeholder="name@example.com" list="dataCategory">
-            <label for="productCategory">Product Category</label>
-            <datalist id="dataCategory">
+          <!-- Price & Category row -->
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="productPrice">Price (USD)</label>
+              <input
+                type="number"
+                class="field-input"
+                id="productPrice"
+                placeholder="0.00"
+                oninput="validationInputs(this, 'msgPrice')"
+              />
+              <p class="field-error d-none" id="msgPrice">Must be a valid positive number.</p>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="productCategory">Category</label>
+              <input
+                type="text"
+                class="field-input"
+                id="productCategory"
+                placeholder="Select category"
+                oninput="validationInputs(this, 'msgCategory')"
+                list="dataCategory"
+              />
+              <datalist id="dataCategory">
                 <option value="tv"></option>
                 <option value="mobile"></option>
                 <option value="screens"></option>
                 <option value="electronics"></option>
-            </datalist>
-            <p class="alert alert-danger d-none" id="msgCategory">It must be from the available options</p>
-
-          </div>
-
-          <div class="form-floating mb-3">
-            <textarea style="height: 100px;" oninput="validationInputs(this, 'msgDescription')" class="form-control" id="productDescription" placeholder="Product Description"></textarea>
-            <label for="productDescription">Product Description</label>
-            <p class="alert alert-danger d-none" id="msgDescription">It must be more than 3 characters</p>
-
-          </div>
-
-          <div class="form-floating mb-3">
-            <input
-              type="file"
-              class="form-control"
-              id="productImage"
-              placeholder="name@example.com"
-              oninput="validationInputs(this, 'msgImage')"
-            />
-            <label for="productImage"">Product Image</label>
-            <p class="alert alert-danger d-none" id="msgImage">It must be image</p>
-
-          </div>
-
-          <!-- buttons -->
-          <button onclick="addProduct()" class="btn btn-light mb-3" id="btnAdd">Add Product</button>
-          <button onclick="updateProduct()" class="btn btn-outline-dark mb-3 d-none" id="btnUpdate">Update Product</button>
-        </div>
-      </div>
-    </section>
-    <section>
-        <div class="container-fluid">
-            <input type="search" id="searchInput" oninput="displayData()" class="form-control w-50 mx-auto my-4" placeholder="Search by name">
-            <div class="row" id="rowData">
-                
+              </datalist>
+              <p class="field-error d-none" id="msgCategory">Must be one of the available options.</p>
             </div>
+          </div>
+
+          <!-- Description -->
+          <div class="field-group">
+            <label class="field-label" for="productDescription">Description</label>
+            <textarea
+              class="field-input field-textarea"
+              id="productDescription"
+              placeholder="Enter product details and specifications..."
+              oninput="validationInputs(this, 'msgDescription')"
+            ></textarea>
+            <p class="field-error d-none" id="msgDescription">Must be more than 3 characters.</p>
+          </div>
+
+          <!-- Product Image -->
+          <div class="field-group">
+            <label class="field-label" for="productImage">Product Image</label>
+            <div class="upload-zone">
+              <svg class="upload-zone__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"/>
+              </svg>
+              <p class="upload-zone__text">Tap to upload or drag &amp; drop</p>
+              <p class="upload-zone__hint">JPG, PNG, SVG — up to 5MB</p>
+              <input
+                type="file"
+                class="upload-zone__input"
+                id="productImage"
+                accept=".jpg,.jpeg,.png,.avif,.svg"
+                oninput="validationInputs(this, 'msgImage')"
+              />
+            </div>
+            <p class="field-error d-none" id="msgImage">Must be an image file (jpg, png, svg…).</p>
+          </div>
+
+          <!-- Buttons -->
+          <button onclick="addProduct()" class="btn-primary" id="btnAdd">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+            Save Product
+          </button>
+          <button onclick="updateProduct()" class="btn-primary d-none" id="btnUpdate">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z"/>
+            </svg>
+            Update Product
+          </button>
         </div>
-    </section>
+
+      </aside>
+
+      <!-- ── Right Column (Desktop) / Inventory ── -->
+      <section class="inventory-column">
+
+        <div class="inventory-header">
+          <h2 class="inventory-title">Current Inventory</h2>
+        </div>
+
+        <!-- Search -->
+        <div class="search-wrap">
+          <svg class="search-wrap__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            type="search"
+            id="searchInput"
+            oninput="displayData()"
+            class="search-wrap__input"
+            placeholder="Search by name"
+          />
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="rowData"></div>
+
+      </section>
+
+    </main>
+
+    <!-- ── Mobile Bottom Nav ── -->
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="bottom-nav__item bottom-nav__item--active" aria-label="Products">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/>
+        </svg>
+        <span>Products</span>
+      </button>
+      <button class="bottom-nav__item" aria-label="Orders">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/>
+        </svg>
+        <span>Orders</span>
+      </button>
+      <button class="bottom-nav__item" aria-label="Inventory">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z"/>
+        </svg>
+        <span>Inventory</span>
+      </button>
+      <button class="bottom-nav__item" aria-label="Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+        </svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <!-- ── Floating Action Button (mobile) ── -->
+    <button class="fab" onclick="document.getElementById('addProductCard').scrollIntoView({behavior:'smooth'})" aria-label="Add product">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+      </svg>
+    </button>
+
     <script src="js/bootstrap.bundle.js"></script>
     <script src="js/index.js"></script>
   </body>
