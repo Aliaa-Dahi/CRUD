@@ -1,0 +1,191 @@
+/* ─────────────────────────────────────────
+   CARD PANEL (form wrapper)
+───────────────────────────────────────── */
+.card-panel {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+.card-panel__icon {
+  width: 32px;
+  height: 32px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-panel__title {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ─────────────────────────────────────────
+   FORM FIELDS
+───────────────────────────────────────── */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field-label {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.field-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: .875rem;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background: var(--color-bg);
+  transition: border-color .2s, box-shadow .2s, background .2s;
+  outline: none;
+}
+
+.field-input:focus {
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 3px rgba(26,122,106,.12);
+}
+
+.field-input::placeholder {
+  color: var(--color-text-light);
+  font-size: .825rem;
+}
+
+/* Valid / Invalid states */
+.field-input.is-valid {
+  border-color: #38a169;
+  background: #f0fff4;
+}
+.field-input.is-invalid {
+  border-color: var(--color-danger);
+  background: var(--color-danger-light);
+}
+
+.field-textarea {
+  resize: vertical;
+  min-height: 88px;
+}
+
+.field-error {
+  font-size: .75rem;
+  color: var(--color-danger);
+  background: var(--color-danger-light);
+  border: 1px solid #feb2b2;
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  margin-top: 2px;
+}
+
+/* ─────────────────────────────────────────
+   UPLOAD ZONE
+───────────────────────────────────────── */
+.upload-zone {
+  position: relative;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+
+.upload-zone:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.upload-zone__icon {
+  color: var(--color-primary);
+  opacity: .8;
+}
+
+.upload-zone__text {
+  font-size: .825rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.upload-zone__hint {
+  font-size: .72rem;
+  color: var(--color-text-light);
+}
+
+.upload-zone__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* ─────────────────────────────────────────
+   PRIMARY BUTTON
+───────────────────────────────────────── */
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: .01em;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 2px 8px rgba(26,122,106,.35);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  box-shadow: 0 4px 14px rgba(26,122,106,.45);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(26,122,106,.3);
+}

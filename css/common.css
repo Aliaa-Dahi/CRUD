@@ -1,0 +1,207 @@
+/* ─────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────── */
+:root {
+  --color-primary:       #1a7a6a;
+  --color-primary-dark:  #135f53;
+  --color-primary-light: #e8f5f2;
+  --color-danger:        #e53e3e;
+  --color-danger-light:  #fff5f5;
+  --color-bg:            #f5f6f8;
+  --color-surface:       #ffffff;
+  --color-border:        #e2e8f0;
+  --color-text:          #1a202c;
+  --color-text-muted:    #718096;
+  --color-text-light:    #a0aec0;
+
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   20px;
+
+  --shadow-sm:   0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:   0 4px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.04);
+  --shadow-lg:   0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.05);
+
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --header-h:    60px;
+  --bottom-nav-h: 68px;
+}
+
+/* ─────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  padding-top: var(--header-h);
+}
+
+/* ─────────────────────────────────────────
+   STICKY HEADER
+───────────────────────────────────────── */
+.app-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.app-header__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.app-header__search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  transition: color .2s, background .2s;
+}
+.app-header__search-btn:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+/* ─────────────────────────────────────────
+   MAIN LAYOUT
+───────────────────────────────────────── */
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px 100px;   /* bottom padding accounts for bottom nav + FAB */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Desktop: side-by-side */
+@media (min-width: 900px) {
+  .app-main {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 28px 32px 40px;
+  }
+  .form-column {
+    width: 360px;
+    flex-shrink: 0;
+    position: sticky;
+    top: calc(var(--header-h) + 20px);
+  }
+  .inventory-column {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* ─────────────────────────────────────────
+   MOBILE BOTTOM NAVIGATION
+───────────────────────────────────────── */
+.bottom-nav {
+  display: flex;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--bottom-nav-h);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -4px 16px rgba(0,0,0,.06);
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-light);
+  font-size: .65rem;
+  font-family: var(--font-family);
+  font-weight: 500;
+  transition: color .2s;
+  padding: 8px 4px;
+}
+
+.bottom-nav__item--active {
+  color: var(--color-primary);
+}
+
+.bottom-nav__item:hover {
+  color: var(--color-primary);
+}
+
+/* Hide bottom nav on desktop */
+@media (min-width: 900px) {
+  .bottom-nav { display: none; }
+  .fab { display: none; }
+  body { padding-bottom: 0; }
+}
+
+/* ─────────────────────────────────────────
+   FLOATING ACTION BUTTON
+───────────────────────────────────────── */
+.fab {
+  position: fixed;
+  bottom: calc(var(--bottom-nav-h) + 16px);
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(26,122,106,.45);
+  z-index: 101;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+
+.fab:hover {
+  background: var(--color-primary-dark);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(26,122,106,.55);
+}
+
+.fab:active { transform: scale(.95); }
+
+/* ─────────────────────────────────────────
+   BOOTSTRAP OVERRIDE UTILITIES
+───────────────────────────────────────── */
+.d-none { display: none !important; }
+
+/* ─────────────────────────────────────────
+   SCROLLBAR (Webkit)
+───────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-light); }

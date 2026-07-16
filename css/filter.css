@@ -1,0 +1,78 @@
+/* ─────────────────────────────────────────
+   INVENTORY SECTION
+───────────────────────────────────────── */
+.inventory-header {
+  margin-bottom: 4px;
+}
+
+.inventory-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -.01em;
+}
+
+/* ─────────────────────────────────────────
+   SEARCH BAR
+───────────────────────────────────────── */
+.search-wrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search-wrap__icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: var(--color-text-light);
+  pointer-events: none;
+}
+
+.search-wrap__input {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 50px;
+  font-size: .875rem;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background: var(--color-surface);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.search-wrap__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26,122,106,.12);
+}
+
+.search-wrap__input::placeholder { color: var(--color-text-light); }
+
+/* ─────────────────────────────────────────
+   PRODUCT GRID
+───────────────────────────────────────── */
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 540px) and (max-width: 899px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1150px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
